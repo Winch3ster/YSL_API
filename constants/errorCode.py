@@ -1,0 +1,5 @@
+SUCCESS = "Success"
+ERROR= "Error"
+NO_USER_FOUND = "No customer in database"
+INVALID_TIME = "Error please enter a valid time"
+INVALID_CREDENTIALS = "Invalid username or password"
