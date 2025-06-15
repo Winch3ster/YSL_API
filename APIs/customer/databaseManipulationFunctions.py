@@ -15,7 +15,7 @@ def searchForSingleUser( userId):
 
 
     print("from searching constant function")
-    print(userId)
+    print(userId)    
     with open(DB_PATH, mode='r', encoding='utf-8') as file:
         csvFile = csv.reader(file)
         header = next(csvFile)           
@@ -62,16 +62,31 @@ def getAllCustomers():
         if dbCol.ic in header and dbCol.name in header:
             customer_id, ic_index, name_index, email_index = header.index(dbCol.customerId), header.index(dbCol.ic), header.index(dbCol.name), header.index(dbCol.email)
             for lines in csvFile:     
-                data = CustomerSearchModel(
-                    pUserId=convertTimeStampToId(lines[customer_id]),
-                    pCustomerIC=lines[ic_index],
-                    pCustomerName=lines[name_index],
-                    pEmail=lines[email_index]
-                )
-                res.append(data)
+                if lines != []:
+                    data = CustomerSearchModel(
+                        pUserId=convertTimeStampToId(lines[customer_id]),
+                        pCustomerIC=lines[ic_index],
+                        pCustomerName=lines[name_index],
+                        pEmail=lines[email_index]
+                    )
+                    res.append(data)
             return res
         else:
             return errorCode.NO_USER_FOUND
+
+def registerCustomer(customerModel): 
+    try: 
+        with open(DB_PATH, mode='a', newline='') as file:
+            # Ensure there's a newline before writing if needed
+            file.write("\n")  
+
+            writer_object = csv.writer(file)
+            data = [value for key, value in vars(customerModel).items()]
+            writer_object.writerow(data)
+            return True
+    except: 
+        print("Error registering customer")
+        return False
 
 def updateCustomerByID(updatedCustomer) -> Union[bool, str]:
     print("Updating user with ID:", updatedCustomer.customerId)

@@ -1,5 +1,5 @@
 from flask import Flask,jsonify,request
-from APIs.customer.databaseManipulationFunctions import searchForSingleUser, getAllCustomers, updateCustomerByID
+from APIs.customer.databaseManipulationFunctions import searchForSingleUser, getAllCustomers, updateCustomerByID, registerCustomer
 from APIs.condition.conditionDbFunctions import getAllConditionsByCustomerId, updateConditionByID, getConditionById
 from APIs.treatment.treatmentDatabaseFunctions import getAllTreatmentByConditionID,createTreatment, getTreatmentByID, getAllTreatmentRevisionByID,updateTreatmentByID, deleteTreatmentByID
 from APIs.security.security import authenticateUser,updatePassword
@@ -26,8 +26,35 @@ def home():
         result.append(customer.to_dict())
     return jsonify(result)
 
+@app.route('/registerCustomer/', methods=['POST', 'OPTIONS'])
+def register_customer():
+    if request.method == 'OPTIONS':
+        return '', 200  # Preflight response
+    data = request.json
+    customer = CustomerModel(
+        pCustomerId=generateUUID(),
+        pOldCustomerId= data['oldCustomerId'], 
+        pEmail=data['email'],
+        pIc = data['ic'],
+        pCustomerName= data['customerName'],
+        pGender=data['gender'],
+        pRace=data['race'],
+        pAddress=data['address'],
+        pHandphoneNum=data['handphone'],
+        pInstagram=data['instagram'],
+        pHowDidYouFindUs=data['discoveryMethod']
+    )
+    status = registerCustomer(customer)
+    if status:
+        return jsonify({"Status":SUCCESS, "message": "OK" }), 200
+    else:
+        return jsonify({"Status": ERROR, "message": "Error registering customer"}), 401
+    
 
-@app.route('/customer/<int:id>', methods=['GET'])
+
+
+
+@app.route('/customer/<string:id>', methods=['GET'])
 def get_customer_by_id(id):
     print("Received request for customer ID:", id)
     customer = searchForSingleUser(str(id))
@@ -142,7 +169,6 @@ def add_condition():
         undergoingTreatment=data['undergoingTreatment'],
         conditionDate=getFormattedDateTime()
     )
-    
     insertConditionToDb(condition)
     return jsonify({"message": "Condition added successfully"}), 201
 
@@ -160,15 +186,7 @@ def edit_condition_details(id):
                 conditionDescription=data['conditionDescription'],
                 undergoingTreatment=data['undergoingTreatment'],
                 conditionDate=existingData.conditionDate
-
             )
-
-            #  self.customerId = customerId
-            #    self.conditionId = condition_id
-            ##    self.conditionDescription = conditionDescription    
-            #    self.undergoingTreatment = undergoingTreatment
-            #    self.conditionDate = conditionDate
-
             result = updateConditionByID(newConditionModel)
             if result: 
                 return jsonify({"message": "Successfully updated condition"}), 200

@@ -1,12 +1,5 @@
-Timestamp,Column 1,Email电邮,IC身份证,Name名,Gender性别,Race种族,Address地址,HP No.手机号,Instagram,How did get know our centre?你是怎么来到我们这里？,Email Address,Score,"CONSENT FOR TREATMENT 
-I understand that I can ask any questions pertaining to the therapy before filling this form. I could, if the need arises, withdraw my consent to stop the therapy at any time throughout the procedure. The procedure, its risks and benefits have been explained to me, and I understand the explanation given.
-I hereby agree for the therapy to be carried out on me. I also understand that a record of the therapy given shall be kept. This record is confidential and will not be disclosed to an outside party, unless it has been authorised by me, or my representative, or as ordered by the court of law to do so.
-治疗同意书
-我明白在填写本表格之前，我可以提出任何疑问相关治疗的问题。如果有需要，我可以在治疗过程中随时撤回我的同意并终止治疗。治疗的程序、风险和益处已向我解释，我已理解所提供的说明。
-因此，我同意接受治疗。我也明白，治疗记录将被保存，该记录是保密的，除非得到我的授权、我的代表的授权，或根据法院的命令，否则不会透露给外部人士。",Postcode 邮编,State州属,Country国家,Are you foreigners你是外国人吗,Passport护照,Passport护照,Old Customer ID,
-3/24/2025 18:35:18,Agree同意,alanyeoh2222@gmail.com,770731075227,Yeoh Man Tong,Male男,Chinese华人,"7E-01-01 Lebuhraya Thean Teik, 11500 Farlim, Penang.",0164370655,,,,,,,,,,,,
-3/24/2025 19:07:02,,alanyeoh2222@gmail.com,770731075227,Alan Yeoh,Male男,Chinese华人,7E-01-01,0164370655,alanyeoh2222,Walk-in自己前来,,,Accept同意,,,,,,,
-3/24/2025 21:13:11,,alanyeoh2222@gmail.com,770731075227,Yeoh Man Tong,Male男,Chinese华人,"7E-01-01 Desa Intan, Lebuhraya Thean Teik,",0164370655,,,,,Accept同意,11500,Penang槟城,,,,,
-3/25/2025 10:50:39,,kannessxiong@gmail.com,611116075278,Yeoh Peng Heong,Female女,Chinese华人,"59h suria vista ,paya terubong ,Air itam 11060",0164815937,,,,,Accept同意,11060,Penang槟城,,,,,
-3/25/2025 14:47:08,,alanyeoh2222@gmail.com,770731075227,Yeoh Man Tong,Male男,Chinese华人,7E-01-01 Lebuhraya Thean Teik,0164370655,,,,,Accept同意,11500,Penang槟城,Malaysia马来西亚,"No, I am local不是，我是本地人。",,,
-3/25/2025 15:25:21,,liyan2672@icloud.c0m,791006075331,Liyan awd awdwa,Female女,Chinese华人,Solok Sungai Pinang 10150 10100 Georgetown Pg ,0124402672,awd,,,,Accept同意,10150,Penang槟城,Malaysia马来西亚,"Yes, I am  foreigners是，我是外地人",Ej4133182,,12312312
+ID,OldCustomerID,Email,IC,Name,Gender,Race,Address,HandphoneNumber,Instagram,CenterDiscovery
+64a89aa9e034,,kingstonlee96@gmail.com,12737631278,Kingston Lee,male,chinese,72a Jalan Bukit Cheras 17 Taman Bukit Cheras,0176106470,,
+3a3759e66b6c,0001,winchester@gmail.com,123456,Winchester Liam,male,Chinese,7D-20-2 Desa Intan,0176106470,winchy245,Facebook group
+
+bfadc86a081e,awdawd,awdw,awdawd,awdawd,female,awdawd,awdawdawd,awdawdawd123213,awd,
