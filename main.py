@@ -15,8 +15,9 @@ from APIs.files.customerFilesServices import customerHasConsentForm,uploadCustom
 import os
 import constants.termConstants as tc
 import constants.dbColumn as dbTerm 
-
-
+from APIs.account.accountServices import AddUser, getAllAccounts, deleteUserById
+from models.userModel import UserModel
+from APIs.security.security import sha256_hash
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
@@ -207,7 +208,7 @@ def authenticate():
     data = request.json
     data = authenticateUser(data['username'], data['password'])
     if data is None:
-        return jsonify({"name":"-", "username": "-", "Role":tc.guest }), 200
+        return jsonify({"name":"-", "username": "-", "Role":tc.guest }), 401
     else:
         return jsonify({"name":data[dbTerm.name], "username": data[dbTerm.username], "role": data[dbTerm.role]}), 200
 
@@ -256,6 +257,38 @@ def handle_file_upload():
 def view_consent_form(id):
     viewCustomerFilePDF(id)
 
+@app.route('/addUser', methods=['POST', 'OPTIONS'])
+def add_user():
+    if request.method == 'OPTIONS':
+            return '', 200  # Preflight response
+    data = request.json
+    userModel = UserModel(
+        pId=generateUUID(),
+        pName= data['name'],
+        pUsername= data['username'],
+        pPassword= sha256_hash(data['password']),
+        pRole=data['role']
+    )
+
+    status = AddUser(userModel)
+    if status:
+        return jsonify({"Status":SUCCESS, "message": "OK" }), 200
+    else:
+        return jsonify({"Status": ERROR, "message": "Error adding user"}), 401
+    
+@app.route('/getAllAccounts', methods=['GET'])
+def get_all_accounts():
+    allAccounts = getAllAccounts()  # list of UserModel instances
+    accounts_as_dicts = [account.to_dict() for account in allAccounts]
+    return jsonify({"accounts": accounts_as_dicts}), 200
+
+@app.route('/deleteUserByID/<string:id>', methods=['GET'])
+def delete_user_by_id(id):
+    status = deleteUserById(id)  # list of UserModel instances
+    if status: 
+        return jsonify({"message": f"User with ID {id} deleted successfully"}), 200
+    else:
+        return jsonify({"message": "User not found"}), 404
 
 
 if __name__ == '__main__':

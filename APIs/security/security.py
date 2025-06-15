@@ -16,7 +16,7 @@ def authenticateUser(username, password):
     with open(DB_PATH, mode='r', newline='', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            if row[dbCol.username] == sha256_hash(username) and row[dbCol.password] == sha256_hash(password):
+            if row[dbCol.username] == username and row[dbCol.password] == sha256_hash(password):
                 return row  # Return the matching row as a dictionary
         return None
     return None 
