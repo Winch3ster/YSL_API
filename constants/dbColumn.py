@@ -10,6 +10,12 @@ instagram = "Instagram"
 knowUsMethod = "CenterDiscovery"
 oldCustomerId = "OldCustomerID"
 
+id="ID"
+username = "Username"
+password = "Password"
+role = "Role"
+
+
 customerModelAttributeToField = {
   'customerId': "Customer ID",
   'ic': "IC",

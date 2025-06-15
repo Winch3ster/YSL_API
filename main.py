@@ -13,6 +13,8 @@ from utils.converterFunctions import getFormattedDateTime
 from constants.errorCode import SUCCESS, ERROR, NO_USER_FOUND, INVALID_TIME, INVALID_CREDENTIALS
 from APIs.files.customerFilesServices import customerHasConsentForm,uploadCustomerFile,viewCustomerFilePDF
 import os
+import constants.termConstants as tc
+import constants.dbColumn as dbTerm 
 
 
 app = Flask(__name__)
@@ -203,11 +205,11 @@ def authenticate():
     if request.method == 'OPTIONS':
             return '', 200  # Preflight response
     data = request.json
-    status = authenticateUser(data['username'], data['password'])
-    if status:
-        return jsonify({"username": data['username'], "Role": "Admin", "isAdmin": True}), 200
+    data = authenticateUser(data['username'], data['password'])
+    if data is None:
+        return jsonify({"name":"-", "username": "-", "Role":tc.guest }), 200
     else:
-        return jsonify({"username": data['username'], "Role": "", "isAdmin": False}), 401
+        return jsonify({"name":data[dbTerm.name], "username": data[dbTerm.username], "role": data[dbTerm.role]}), 200
 
 
 @app.route('/updatePassword', methods=['POST', 'OPTIONS'])
