@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,request
+from flask import Flask,jsonify,request,send_file
 from APIs.customer.databaseManipulationFunctions import searchForSingleUser, getAllCustomers, updateCustomerByID, registerCustomer
 from APIs.condition.conditionDbFunctions import getAllConditionsByCustomerId, updateConditionByID, getConditionById
 from APIs.treatment.treatmentDatabaseFunctions import getAllTreatmentByConditionID,createTreatment, getTreatmentByID, getAllTreatmentRevisionByID,updateTreatmentByID, deleteTreatmentByID
@@ -11,7 +11,7 @@ from APIs.condition.conditionDbFunctions import insertConditionToDb
 from utils.generatorFunctions import generateUUID
 from utils.converterFunctions import getFormattedDateTime
 from constants.errorCode import SUCCESS, ERROR, NO_USER_FOUND, INVALID_TIME, INVALID_CREDENTIALS
-from APIs.files.customerFilesServices import customerHasConsentForm,uploadCustomerFile,viewCustomerFilePDF
+from APIs.files.customerFilesServices import customerHasConsentForm,uploadCustomerFile,viewCustomerFilePDF,uploadConditionImage,getConditionImage
 import os
 import constants.termConstants as tc
 import constants.dbColumn as dbTerm 
@@ -253,6 +253,46 @@ def handle_file_upload():
     except:
          return jsonify({"status" : ERROR}), 400
     
+
+@app.route('/uploadConditionImage', methods=['POST'])
+def handle_condition_image_upload():
+    try:
+        file = request.files['file']
+        conditionID = request.form['conditionID']
+        customerID = request.form['customerId']
+        file_name = request.form['fileName']
+
+
+        result = uploadConditionImage(conditionID,customerID, file, file_name)
+        return  jsonify({"status" : SUCCESS}), 200
+    except:
+         return jsonify({"status" : ERROR}), 400
+    
+
+
+@app.route('/getConditionImage', methods=['POST'])
+def get_condition_image_by_id():
+    try:
+        conditionID = request.form['conditionID']
+        customerID = request.form['customerId']
+
+
+        result = getConditionImage(customerID,conditionID)
+
+        if result is not None:
+            return send_file(result, as_attachment=False)
+        else:
+            return jsonify({"status" : ERROR}), 400
+
+    except:
+         return jsonify({"status" : ERROR}), 400
+
+
+
+
+
+
+
 @app.route('/viewCustomerConsentForm/<string:id>', methods=['GET'])
 def view_consent_form(id):
     viewCustomerFilePDF(id)
@@ -289,6 +329,7 @@ def delete_user_by_id(id):
         return jsonify({"message": f"User with ID {id} deleted successfully"}), 200
     else:
         return jsonify({"message": "User not found"}), 404
+
 
 
 if __name__ == '__main__':

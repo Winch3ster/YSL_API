@@ -75,6 +75,44 @@ def uploadCustomerFile(customer_id, file, fileName):
         print(f"Error copying file: {e}")
         return False
 
+def uploadConditionImage(condition_id,customer_id, file, fileName):
+    print(file)
+    _, extension = os.path.splitext(fileName)
+    print(extension)
+    #check if foolder to store customer file exist 
+    customer_folder_path = os.path.join(attachment_path, customer_id)
+    print(customer_folder_path)
+    # if no folder storing customer file exist create one
+    if not os.path.exists(customer_folder_path):
+        os.makedirs(customer_folder_path)
+    new_file_path = os.path.join(customer_folder_path, f'{fileName}')
+    print(new_file_path)
+    #Save the file in the folder with the name consentForm
+    try:
+        file.save(new_file_path)
+        return True
+    except Exception as e:
+        print(f"Error copying file: {e}")
+        return False
+    
+def getConditionImage(customer_id, condition_id):
+       
+    customer_folder_path = os.path.join(attachment_path, customer_id)
+
+    search_pattern = os.path.join(customer_folder_path, f'condition_{condition_id}.*')
+    
+    # Use glob to find matching files
+    matching_files = glob.glob(search_pattern)
+    
+    if matching_files:
+        return matching_files[0]  # Return the first match
+    else:
+        return None
+    
+
+
+
+
 def getConditionPicturePath(customerId, conditionId):
     """
     This function retrieves the condition picture path for a given customer ID and condition ID.
