@@ -32,25 +32,26 @@ def searchForSingleUser( userId):
             knowUsMethod_index = header.index(dbCol.knowUsMethod)
             race_index = header.index(dbCol.race)  
             old_cus_id_index = header.index(dbCol.oldCustomerId)
-          
-            for lines in csvFile:
-                if convertTimeStampToId(lines[customer_id]) == userId:
-                    print(lines[old_cus_id_index])
 
-                    customer = CustomerModel(
-                        pCustomerId=convertTimeStampToId(lines[customer_id]),
-                        pOldCustomerId= lines[old_cus_id_index],
-                        pIc=lines[ic_index],
-                        pCustomerName=lines[name_index],
-                        pEmail= lines[email_index],
-                        pHandphoneNum= lines[handphone_index],
-                        pGender=lines[gender_index],
-                        pAddress=lines[address_index],
-                        pInstagram=lines[insta_index],
-                        pHowDidYouFindUs= lines[knowUsMethod_index],
-                        pRace=lines[race_index]
-                    )
-                    return customer          
+            for lines in csvFile:
+                if lines != []:
+                    if lines[customer_id] == userId:
+                        print(lines[old_cus_id_index])
+
+                        customer = CustomerModel(
+                            pCustomerId=lines[customer_id],
+                            pOldCustomerId= lines[old_cus_id_index],
+                            pIc=lines[ic_index],
+                            pCustomerName=lines[name_index],
+                            pEmail= lines[email_index],
+                            pHandphoneNum= lines[handphone_index],
+                            pGender=lines[gender_index],
+                            pAddress=lines[address_index],
+                            pInstagram=lines[insta_index],
+                            pHowDidYouFindUs= lines[knowUsMethod_index],
+                            pRace=lines[race_index]
+                        )
+                        return customer          
         else:
             return errorCode.NO_USER_FOUND
         
