@@ -45,7 +45,11 @@ def register_customer():
         pAddress=data['address'],
         pHandphoneNum=data['handphone'],
         pInstagram=data['instagram'],
-        pHowDidYouFindUs=data['discoveryMethod']
+        pHowDidYouFindUs=data['discoveryMethod'],
+        pWeChat=data.get('weChat', '-'),
+        pHeight=data.get('height', '-'),
+        pWeight=data.get('weight', '-'),
+        pBloodType=data.get('bloodType', '-')
     )
     status = registerCustomer(customer)
     if status:
@@ -83,7 +87,11 @@ def update_customer_by_id(id):
         pAddress=data['address'],
         pHandphoneNum=data['handphone'],
         pInstagram=data['instagram'],
-        pHowDidYouFindUs=data['discoveryMethod']
+        pHowDidYouFindUs=data['discoveryMethod'],
+        pWeChat=data.get('weChat', '-'),
+        pHeight=data.get('height', '-'),
+        pWeight=data.get('weight', '-'),
+        pBloodType=data.get('bloodType', '-')
     )
     status = updateCustomerByID(customer)
     if status:

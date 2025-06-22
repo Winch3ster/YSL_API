@@ -1,5 +1,7 @@
-ID,OldCustomerID,Email,IC,Name,Gender,Race,Address,HandphoneNumber,Instagram,CenterDiscovery
+ID,OldCustomerID,Email,IC,Name,Gender,Race,Address,HandphoneNumber,Instagram,CenterDiscovery,WeChat,Height,Weight,BloodType
 64a89aa9e034,,kingstonlee96@gmail.com,12737631278,Kingston Lee,male,chinese,72a Jalan Bukit Cheras 17 Taman Bukit Cheras,0176106470,,
 3a3759e66b6c,0001,winchester@gmail.com,123456,Winchester Liam,male,Chinese,7D-20-2 Desa Intan,0176106470,winchy245,Facebook group
 
 bfadc86a081e,awdawd,awdw,awdawd,awdawd,female,awdawd,awdawdawd,awdawdawd123213,awd,
+
+6030684157d8,1010,william@gmail.com,82716,William Henry,male,other,jalan Ismail 0512,0282621,,,,170,56,B+

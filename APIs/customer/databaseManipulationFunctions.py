@@ -32,6 +32,10 @@ def searchForSingleUser( userId):
             knowUsMethod_index = header.index(dbCol.knowUsMethod)
             race_index = header.index(dbCol.race)  
             old_cus_id_index = header.index(dbCol.oldCustomerId)
+            wechat_index = header.index(dbCol.weChat)
+            height_index = header.index(dbCol.height)
+            weight_index = header.index(dbCol.weight)
+            blood_type_index = header.index(dbCol.bloodType)
 
             for lines in csvFile:
                 if lines != []:
@@ -49,7 +53,11 @@ def searchForSingleUser( userId):
                             pAddress=lines[address_index],
                             pInstagram=lines[insta_index],
                             pHowDidYouFindUs= lines[knowUsMethod_index],
-                            pRace=lines[race_index]
+                            pRace=lines[race_index],
+                            pWeChat=lines[wechat_index],
+                            pHeight=lines[height_index],
+                            pWeight=lines[weight_index],
+                            pBloodType=lines[blood_type_index]
                         )
                         return customer          
         else:
@@ -117,13 +125,17 @@ def updateCustomerByID(updatedCustomer) -> Union[bool, str]:
         knowUsMethod_index = header.index(dbCol.knowUsMethod)
         race_index = header.index(dbCol.race)
         old_cus_id_index = header.index(dbCol.oldCustomerId)
+        wechat_index = header.index(dbCol.weChat)
+        height_index = header.index(dbCol.height)
+        weight_index = header.index(dbCol.weight)
+        blood_type_index = header.index(dbCol.bloodType)
 
         # Update matching row
         for i in range(1, len(csv_reader)):
             row = csv_reader[i]
 
             if convertTimeStampToId(row[customer_id]) == updatedCustomer.customerId:
-                row[customer_id] = str(row[customer_id])  # usually timestamp remains the same
+                row[customer_id] = str(row[customer_id]) 
                 row[old_cus_id_index] = updatedCustomer.oldCustomerId
                 row[ic_index] = updatedCustomer.ic
                 row[name_index] = updatedCustomer.customerName
@@ -134,6 +146,10 @@ def updateCustomerByID(updatedCustomer) -> Union[bool, str]:
                 row[insta_index] = updatedCustomer.instagram
                 row[knowUsMethod_index] = updatedCustomer.howDidYouFindUs
                 row[race_index] = updatedCustomer.race
+                row[wechat_index] = updatedCustomer.weChat
+                row[height_index] = updatedCustomer.height
+                row[weight_index] = updatedCustomer.weight
+                row[blood_type_index] = updatedCustomer.bloodType
                 updated = True
                 break
 

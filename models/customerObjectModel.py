@@ -11,6 +11,10 @@ class CustomerModel():
                 pHandphoneNum="-",
                 pInstagram="-",
                 pHowDidYouFindUs= "-",
+                pWeChat="-",
+                pHeight="-",
+                pWeight="-",
+                pBloodType="-",
                 ):
         self.customerId = pCustomerId
         self.oldCustomerId = pOldCustomerId
@@ -23,6 +27,10 @@ class CustomerModel():
         self.handphone = pHandphoneNum
         self.instagram = pInstagram
         self.howDidYouFindUs = pHowDidYouFindUs
+        self.weChat = pWeChat 
+        self.height = pHeight
+        self.weight = pWeight
+        self.bloodType = pBloodType
 
 
     def to_dict(self):
@@ -37,7 +45,11 @@ class CustomerModel():
             'address': self.address,
             'handphone': self.handphone,
             'instagram': self.instagram,
-            'howDidYouFindUs': self.howDidYouFindUs
+            'howDidYouFindUs': self.howDidYouFindUs,
+            'weChat': self.weChat,
+            'height': self.height,
+            'weight': self.weight,
+            'bloodType': self.bloodType
         }
         
 
